@@ -14,14 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 # from horoscope.views import leo импорт только leo
-from horoscope import views
+# from horoscope import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('horoscope/', include('horoscope.urls')) #подключаю urls.py из папки horoscope
     # path('horoscope/leo/', leo), #'horoscope/leo', представление которое в файлике views
-    path('horoscope/leo/', views.leo),  # 'horoscope/leo', представление которое в файлике views
-    path('horoscope/leo/', views.scorpio),
+
 
 ]
