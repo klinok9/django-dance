@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 
 # Create your views here.
 # def Aries(reuest):
@@ -69,7 +69,7 @@ zodiac_dict = {
 }
 
 
-def info_about_sign(requst, sign_zodiak):
+def info_about_sign(requst, sign_zodiak:str):
     description = zodiac_dict.get(sign_zodiak)
     if description:
         return HttpResponse(description)
@@ -77,9 +77,9 @@ def info_about_sign(requst, sign_zodiak):
         return HttpResponseNotFound(f'{sign_zodiak} - ne znak')
 
 
-def info_about_sign_numb(requst, sign_zodiak):
-    description = zodiac_dict.get(sign_zodiak)
-    if description:
-        return HttpResponse(description)
-    else:
-        return HttpResponseNotFound(f'{sign_zodiak} - ne znak')
+def info_about_sign_numb(requst, sign_zodiak:int):
+    zodiacs = list(zodiac_dict)
+    if sign_zodiak > len(zodiacs):
+        return HttpResponseNotFound(f'Неправильный номер! - {sign_zodiak}')
+    name_zodiac = zodiacs[sign_zodiak-1]
+    return HttpResponseRedirect(f'/horoscope/{name_zodiac}') # если число = индекс словаря то перенеправление работает
