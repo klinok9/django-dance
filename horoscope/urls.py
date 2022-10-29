@@ -3,7 +3,10 @@ from . import views  #from . импорт из этой папки (horoscope)
 
 urlpatterns = [
 
-    path('<sign_zodiak>/', views.info_about_sign)  # <sign_zodiak>-роут как параметр
+    path('<int: sign_zodiak>/', views.info_about_sign),  # <sign_zodiak>-роут как параметр
+    path('<str: sign_zodiak>/', views.info_about_sign_numb)  # <sign_zodiak>-роут как параметр
+
+
     # path('Aries/', views.Aries),  # 'horoscope/leo', представление которое в файлике views
     # path('Taurus/', views.Taurus),
     # path('Gemini/', views.Gemini),

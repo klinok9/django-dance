@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse , HttpResponseNotFound
-
+from django.http import HttpResponse, HttpResponseNotFound
 
 # Create your views here.
 # def Aries(reuest):
@@ -50,12 +49,37 @@ from django.http import HttpResponse , HttpResponseNotFound
 #     return HttpResponse("знак зодиака Pisces")
 
 # Динамический Url
-def info_about_sign (requst, sign_zodiak):
-    if sign_zodiak == 'leo':
-        return HttpResponse("знак зодиака leo")
-    elif sign_zodiak == 'Aries':
-        return HttpResponse("Знак зодиака Aries")
-    elif sign_zodiak == 'Taurus':
-        return HttpResponse("Знак зодиака Taurus")
+# def info_about_sign (requst, sign_zodiak):
+#     if sign_zodiak == 'leo':
+#         return HttpResponse("знак зодиака leo")
+#     elif sign_zodiak == 'Aries':
+#         return HttpResponse("Знак зодиака Aries")
+#     elif sign_zodiak == 'Taurus':
+#         return HttpResponse("Знак зодиака Taurus")
+#     else:
+#         return HttpResponseNotFound(f'{sign_zodiak} - ne znak')
+
+
+# Убираем if, elif. Создаем словарь
+
+zodiac_dict = {
+    'leo': "знак зодиака leo",
+    'Aries': "Знак зодиака Aries",
+    'Taurus': "Знак зодиака Taurus"
+}
+
+
+def info_about_sign(requst, sign_zodiak):
+    description = zodiac_dict.get(sign_zodiak)
+    if description:
+        return HttpResponse(description)
+    else:
+        return HttpResponseNotFound(f'{sign_zodiak} - ne znak')
+
+
+def info_about_sign_numb(requst, sign_zodiak):
+    description = zodiac_dict.get(sign_zodiak)
+    if description:
+        return HttpResponse(description)
     else:
         return HttpResponseNotFound(f'{sign_zodiak} - ne znak')
